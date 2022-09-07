@@ -188,7 +188,7 @@ const haha =[{
             id:11,
             list: [{
                 id:111,
-								list: [{
+		list: [{
                   id: 1111,
                 }],
             },{
@@ -255,7 +255,7 @@ function flatArr(arr, handleVal, idArr) {
  * @param handleVal 选择的处理的属性
  * foreach + 递归
  */
-conversionArr(arr: Array<Record<string, any> | string []>, handleVal: string) {
+const conversionArr = (arr: Array<Record<string, any> | string []>, handleVal: string) => {
     arr.forEach((item: any) => {
         item.label = item.name;
         item.value = item.id;
