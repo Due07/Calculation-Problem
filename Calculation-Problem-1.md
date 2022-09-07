@@ -239,8 +239,8 @@ function flatArr(arr, handleVal, idArr) {
  */
   flatArr(arr: Array<Record<string, any> | string[]>, handleVal: string) {
       return arr.reduce((pre: any, cur: any) => {
-          const curArr: any = cur[handleVal] ? this.flatArr(cur[handleVal], handleVal).flat() : [];
-          return !pre ? [[cur, ...curArr]] : [...pre, [cur, ...curArr]];
+          const curArr: any = cur[handleVal] ? this.flatArr(cur[handleVal], handleVal) : [];
+          return !pre ? [cur, ...curArr] : [...pre, cur, ...curArr];
       }, []);
   }
 ```
