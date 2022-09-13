@@ -1,6 +1,6 @@
 ## Ts 公用方法装饰器
 
-```
+```typescript
 import Vue from 'vue';
 import stringify from 'qs/lib/stringify';
 
