@@ -179,7 +179,20 @@ function calcFun (arr, target) {
 
 ```
 
-### 8. 树形结构转化关系数组
+### 8. 求一个字符串在另一个字符串中出现的次数
+```typescript
+const a ='ab';
+const b = 'abaspdjpabasdabasdabsafqweqrabapjpjabppijpfababababofi';
+const handleValue = (originStr: string, searchStr: string) => {
+    if (!originStr || !searchStr) return new Error(`参数缺少`);
+    const searchArr = originStr.match(new RegExp(searchStr, 'g')); 
+    return searchArr ? searchArr.length : null;
+}
+
+handleValue(b, a);
+```
+
+### 9. 树形结构转化关系数组
 
 ```javascript
 const haha =[{
@@ -227,7 +240,7 @@ function flatArr(arr, handleVal, idArr) {
 };
 ```
 
-### 9. 树形数据拍平
+### 10. 树形数据拍平
 
 ```typescript
 // 拍平数据
@@ -245,7 +258,7 @@ function flatArr(arr, handleVal, idArr) {
   }
 ```
 
-### 10. 扁平数组转化树结构
+### 11. 扁平数组转化树结构
 
 ```typescript
 // 转化成cascader想要的数据
