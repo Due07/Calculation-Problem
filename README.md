@@ -1,12 +1,8 @@
 # Calculation-Problem
-常见的工作计算函数/面试函数
+常见的工作计算函数 / 面试函数
 
-## Calculation-Problem-1
+## Calculation-Problem-1.md
    常见的工作计算函数/面试函数
-   
-## Ts-Method-Decorator
-   TS公用装饰器
-
 
 ## Decorator
 ```
