@@ -47,7 +47,7 @@
 
    类似vue的 {{ }} 当然没有VNode (原因还没看😅)
 
-   VNode: 可以找一下snabbdom 思想, vue也是在这基础上建立的
+   VNode: 可以找一下snabbdom 思想, vue也是在这基础上建立的 link: https://github.com/coconilu/Blog/issues/152
    // 类似于eval 把字符串转成代码化之行
    new Function : https://javascript.info/new-function
 ```
