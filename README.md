@@ -31,3 +31,23 @@
       1. 修复富文本黏贴图片时base64的问题
 
 ```
+
+## Http
+```typescript
+   封装axios
+      功能点: 节流(拦截重复请求)、配合多语言化请求返回信息、统一管理response、error信息提醒
+   ----- 暂无 ~
+```
+
+## 模拟模版渲染
+```javascript
+   ** 一个简单的模版渲染 **
+
+   缺: 没有ejs渲染的if / forearch / 声明常量 set xx  判断, 后期想到就补上
+
+   类似vue的 {{ }} 当然没有VNode (原因还没看😅)
+
+   VNode: 可以找一下snabbdom 思想, vue也是在这基础上建立的
+   // 类似于eval 把字符串转成代码化之行
+   new Function : https://javascript.info/new-function
+```
