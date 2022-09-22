@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{ name }}
+        {{ haha }}
+        {{ haha === 'ad' ? "1" : "2" }}
+    </div>
+</body>
+<script>
+    var app = new Render({
+        el: '#app',
+        data: {
+            name: 'abs',
+            haha: 'ad',
+        },
+    });
+
+    function Render(options) {
+        this.data = options.data;
+        this.el = document.querySelector(options.el);
+
+        const reg = /\{\{\s?(.*?)\s?\}\}/g;
+        this.el.innerHTML = this.el.innerHTML.replace(reg, (text, tag) => {
+            console.log(tag);
+
+            return new Function(
+                ...Object.keys(this.data),
+                `return ${tag}`,
+            )(...Object.values(this.data));
+        });
+
+        return this;
+    }
+</script>
+</html>
