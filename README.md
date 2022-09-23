@@ -1,3 +1,7 @@
+---
+typora-copy-images-to: ./image
+---
+
 # Calculation-Problem
 常见的工作计算函数 / 面试函数
 
@@ -51,3 +55,18 @@
    // 类似于eval 把字符串转成代码化之行
    new Function : https://javascript.info/new-function
 ```
+
+## 穿梭框
+> **vue-property-decorator + typescript + vue2.6 + elem**
+>
+> **穿梭框小组件 需求: 列表展示时，自定义化表头**   
+>
+> |                            设置前                            |                            设置后                            |
+> | :----------------------------------------------------------: | :----------------------------------------------------------: |
+> | <img src="/Users/ganguo/Desktop/Calculation-Problem/image/image-20220923115231264.png" alt="image-20220923115231264" style="zoom: 50%; display: inline-block" /> | <img src="/Users/ganguo/Desktop/Calculation-Problem/image/image-20220923115654730.png" alt="image-20220923115654730" style="zoom: 60%; display: inline-block" /> |
+>
+> elem的穿梭框支持render渲染（tsx / jsx）
+>
+> tips：tableAll (全部表头) 、defaultTable (默认表头)、customTable (已设置的自定义表头) 需要考虑好类型格式
+>
+> 
