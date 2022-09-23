@@ -63,7 +63,7 @@ typora-copy-images-to: ./image
 >
 > |                            设置前                            |                            设置后                            |
 > | :----------------------------------------------------------: | :----------------------------------------------------------: |
-> | <img src="/Users/ganguo/Desktop/Calculation-Problem/image/image-20220923115231264.png" alt="image-20220923115231264" style="zoom: 50%; display: inline-block" /> | <img src="/Users/ganguo/Desktop/Calculation-Problem/image/image-20220923115654730.png" alt="image-20220923115654730" style="zoom: 60%; display: inline-block" /> |
+> | <img src="https://raw.githubusercontent.com/Due07/Calculation-Problem/master/image/image-20220923115231264.png" alt="image-20220923115231264" style="zoom: 50%; display: inline-block" /> | <img src="https://raw.githubusercontent.com/Due07/Calculation-Problem/master/image/image-20220923115654730.png" alt="image-20220923115654730" style="zoom: 60%; display: inline-block" /> |
 >
 > elem的穿梭框支持render渲染（tsx / jsx）
 >
