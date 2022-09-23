@@ -42,10 +42,8 @@
 <script>
 import Cropper from 'cropperjs';
 import FileUpload from '@/scripts/widget/FileUpload';
-import 'quill/dist/quill.core.css';
-import 'quill/dist/quill.snow.css';
-import 'quill/dist/quill.bubble.css';
 import 'cropperjs/dist/cropper.min.css';
+import HttpServices from './HttpServices';
 
 export default {
     name: 'quill-editor-wrapper',
@@ -95,7 +93,6 @@ export default {
                             },
                         },
                     },
-                    // 黏贴图片base64问题
                     clipboard: {
                         matchers: [
                             ['img', this.noPastingPictures],
@@ -197,7 +194,6 @@ export default {
         },
         // 上传
         upload: async function (file) {
-            // 上传文件 无贴code
             const files = await (new FileUpload())
                 .uploadStart([file]);
 
@@ -219,12 +215,32 @@ export default {
                         const { image } = item.insert;
                         const file = this.dataURItoBlob(image);
                         file.name = new Date().getTime();
-                        this.upload(file);
+
+                        this.copyPicture(image, file);
+                        // this.upload(file);
                     }
                 });
             }
 
             return delta;
+        },
+
+        async copyPicture(image, file) {
+            const loading = (new HttpServices()).loading('.quill-editor');
+            try {
+                // link: https://www.kancloud.cn/liuwave/quill/1409371
+                const quill = this.$refs.quill.quill;
+                const length = quill.getSelection(true).index;
+
+                const fileUrl = await (new FileUpload())
+                    .uploadStart([file]);
+                this.content = this.content.replace(image, fileUrl[0].url);
+                this.$nextTick(() => {
+                    quill.setSelection(length + 1); // 光标位置修改
+                });
+            } finally {
+                loading.close();
+            }
         },
     },
 };
