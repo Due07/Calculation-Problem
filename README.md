@@ -1,9 +1,6 @@
 # Calculation-Problem
 常见的工作计算函数 / 面试函数
 
-## Calculation-Problem-1.md
-   常见的工作计算函数/面试函数
-
 ## Decorator
 ```
    Decorator            装饰器    属性 -> 访问 -> 参数 -> 方法
@@ -39,7 +36,7 @@
    ----- 暂无 ~
 ```
 
-## 模拟模版渲染
+## TemplateRender (模拟模版渲染)
 ```javascript
    ** 一个简单的模版渲染 **
 
@@ -52,7 +49,7 @@
    new Function : https://javascript.info/new-function
 ```
 
-## 穿梭框
+## Transfer (穿梭框)
 > **vue-property-decorator + typescript + vue2.6 + elem**
 >
 > **穿梭框小组件 需求: 列表展示时，自定义化表头**   
