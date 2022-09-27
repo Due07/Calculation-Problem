@@ -70,7 +70,7 @@
 > - src 							---------->	 string
 > - fit 							---------->     fill / contain / cover / none / scale-down
 > - alt 							---------->     string
-> - referrer-policy 			---------->     string
+> - referrerPolicy 			---------->     string
 > - lazy 						---------->    boolean
 >
 > **Events**
@@ -90,10 +90,18 @@
    // 功能点(主): 懒加载 / 失败占位 / 未加载占位 / 预览(未上~)
    // 例：
    <ImageComponent
-      :src=""
       lazy
+      :src=""
+      :alt=""
       fit="fill"
+      :referrerPolicy
+      @load=""
+      @error=""
    >
+   <template #placeholder>.........</template>
+
+   <template #error>.........</template>
+
    </ImageComponent>
 
 ```
