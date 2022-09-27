@@ -85,7 +85,8 @@
 
 ```typescript
    // vue-property-decorator + vue + typescript + sass
-   // IntersectionObserver 兼容性: (https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver/IntersectionObserver)
+   // IntersectionObserver 兼容性: https://caniuse.com/?search=IntersectionObserver
+   // IntersectionObserver (https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver/IntersectionObserver)
 
    // 功能点(主): 懒加载 / 失败占位 / 未加载占位 / 预览(未上~)
    // 例：
