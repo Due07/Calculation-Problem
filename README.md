@@ -66,3 +66,37 @@
 > tips：tableAll (全部表头) 、defaultTable (默认表头)、customTable (已设置的自定义表头) 需要考虑好类型格式
 >
 > 
+
+## Image-Template（图片组件）
+> **Attributes**
+>
+> - src 							---------->	 string
+> - fit 							---------->     fill / contain / cover / none / scale-down
+> - alt 							---------->     string
+> - referrer-policy 			---------->     string
+> - lazy 						---------->    boolean
+>
+> **Events**
+>
+> - load							---------->    加载成功触发
+> - error						---------->    加载失败触发
+>
+> **Slots**
+>
+> - placeholder				---------->    未加载的占位内容
+> - error				      ---------->    加载失败的内容
+
+```typescript
+   // vue-property-decorator + vue + typescript + sass
+   // IntersectionObserver 兼容性: (https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver/IntersectionObserver)
+
+   // 功能点(主): 懒加载 / 失败占位 / 未加载占位 / 预览(未上~)
+   // 例：
+   <ImageComponent
+      :src=""
+      lazy
+      fit="fill"
+   >
+   </ImageComponent>
+
+```
