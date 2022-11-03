@@ -36,7 +36,6 @@
 ```typescript
    封装axios
       功能点: 节流(拦截重复请求)、配合多语言化请求返回信息、统一管理response、error信息提醒
-   ----- 暂无 ~
 ```
 
 ## TemplateRender (模拟模版渲染)

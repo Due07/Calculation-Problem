@@ -282,4 +282,43 @@ const conversionArr = (arr: Array<Record<string, any> | string []>, handleVal: s
 }
 ```
 
+### 12. 深拷贝函数
+
+```typescript
+/*
+ * 1. JSON.parse(JSON.stringify(obj)) 常用的深拷贝 方法
+ *		缺陷： - obj 只能 string / number / boolean / Array / Object , 传递 undefined / null / symbol 报错
+ *					- obj 下属性值 不能为 undefined / function / symbol , 被序列化后的属性 (key) 则被默认删除
+ *					- obj 下属性值 Regxp / Error / new Date ，被序列化后值为空对象 {}
+ *					- obj 下属性值 NaN / Infinity / -Infinity ，被序列化后值为null
+ * 需求： 创建一个函数方法，使其满足JSON.parse(JSON.stringify(obj)) 的所有缺陷。
+ */
+
+type Ttarget = any[] | string | number | boolean | Object | undefined | null | symbol | Date | RegExp; 
+
+const deepCopy = (target: Ttarget) => {
+    const test = /^\[object +(\S*)\]$/;
+    const regVal = Reflect.toString.call(target).replace(test, '$1');
+
+    if (regVal === 'Object' || regVal === 'Array') {
+        let result: Record<string, any> | any[] = regVal === 'Object'
+            ? new Object
+            : new Array;
+        for (const key in (target as Object | any[])) {
+            if (Reflect.has(target as Object | any[], key)) {
+                result[key] = deepCopy((target as Record<string, any>)[key]);
+            }
+        }
+        return result;
+    }
+
+    if (regVal === 'Date') return new Date(target as Date);
+
+    if (regVal === 'RegExp') return new RegExp(target as RegExp);
+
+    // string / boolean / number / undefined / null / symbol / NaN / Infinity / -Infinity
+    return target;
+
+};
+```
 
