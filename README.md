@@ -6,16 +6,45 @@
 
 ## Decorator
 ```
-   Decorator            装饰器    属性 -> 访问 -> 参数 -> 方法
+   Decorator                             装饰器    属性 -> 访问 -> 参数 -> 方法
    |
-   ├── class            类装饰器
-   |   └── drag          └── 拖拽装饰器
+   ├── class                             类装饰器
+   |   └── drag                           └── 拖拽装饰器
    |
-   ├── method           方法装饰器
-   |   └── public        └── 公共装饰器
+   ├── method                            方法装饰器
+   │   │                                  │
+   │   ├── ParameterRoute                 ├── 参数化路由
+   │   │                                  │
+   │   └── public                         └── 公共装饰器
    │
    └── types.ts         定义类型
 ```
+<img src="https://raw.githubusercontent.com/Due07/Calculation-Problem/master/image/image-20221103180504481.png" alt="image-20221103180504481" />
+
+```typescript
+   import { InitializationAddress, addRouteAddress } from '../Decorator/method/ParameterRoute';
+   // 参数化路由
+   export default class UserList extends Vue {
+      form = {
+         size: 10,
+         page: 1,
+      };
+
+      @InitializationAddress('form')
+      mounted() {
+         // ....发送请求方法
+         this.fetch(this.form);
+      }
+
+      @addRouteAddress('type')
+      fetch(data: any) {
+         // 发送请求
+         // this.http(data)....
+      }
+   }
+
+```
+
 
 ## QuillEditor
 ```
