@@ -259,7 +259,7 @@ function flatArr(arr, handleVal, idArr) {
 ```
 
 ### 11. 扁平数组转化树结构
-
+<!-- 有问题 -->
 ```typescript
 // 转化成cascader想要的数据
 /**
@@ -322,3 +322,55 @@ const deepCopy = (target: Ttarget) => {
 };
 ```
 
+### 13. 函数题
+
+```typescript
+    /**
+     * 第一题 1. 输入num = 3 页面展示如下表格
+     * 1 1 1 
+     * 2 2 2
+     * 3 3 3
+     */
+
+    const handlValue = (num: number) => {
+    let arr = new Array(num).fill(0);
+    arr = new Array(num).fill(arr);
+
+    // const valueArr = arr.map((item, index) => (Math.ceil((index + 0.1) / 3)))
+    const valueArr = arr.map((item, index) => {
+            return new Array(item.length).fill(index + 1);
+        })
+        console.log(valueArr);
+    }
+
+    /**
+     * 第二题 2. 输入num = 3 展示如下表格
+     * 1 2 3
+     * 6 5 4
+     * 7 8 9
+     * 输入 num = 4
+     * 1 2 3 4
+     * 8 7 6 5
+     * 9 10 11 12
+     * 16 15 14 13
+     */
+
+    const handlValueArr = (num: number) => {
+    const arr = Array(num).fill(Array(num));
+
+    const valueArr = arr.map((item, index) => {
+
+        const returnArr = Array(num).fill(index + 1)
+            .map((ite, iteIndex) => {
+                const superpositionNum = (index === 0 ? 0 : (item.length - 1) * index);
+                return (
+                    ite + superpositionNum
+                ) + (index % 2 ? (item.length - iteIndex - 1) : iteIndex);
+            });
+
+            return returnArr;
+        });
+
+        console.log(valueArr);
+    }
+```
