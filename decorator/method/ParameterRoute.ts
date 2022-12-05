@@ -68,7 +68,7 @@ export const AddRouteAddress: TMethodCallBack = (value: string | string[]) => (t
         const newQuery = location.pathname + location.search; 
 
         // if (JSON.stringify(queryObj) !== JSON.stringify(query)) {
-        if (originQuery === newQuery) {
+        if (originQuery !== newQuery) {
             router.replace({query: findObj});
         }
 
