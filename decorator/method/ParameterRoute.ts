@@ -16,13 +16,13 @@ const ConversionType = (obj: Record<string, any>) => {
             const value = handleObj[key];
 
             // 数字类型
-            if (Number.isNaN(+value)) {
-                return handleObj[key] = +value;
+            if (value && !Number.isNaN(+value)) {
+                handleObj[key] = +value;
             }
 
             // boolean
             if (value === 'false' || value === 'true') {
-                return handleObj[key] = JSON.parse(value);
+                handleObj[key] = JSON.parse(value);
             }
 
             // Array / Obj 不处理
@@ -57,11 +57,18 @@ export const AddRouteAddress: TMethodCallBack = (value: string | string[]) => (t
             if (value && Reflect.has(findObj, item)) delete findObj[item];
         });
 
-        const queryObj = router.resolve({query: findObj}).route.query;
-        const { search } = window.location;
-        const query = ConversionType(parse(search.slice(1)));
+        // const queryObj = ConversionType(
+        //     router.resolve({query: findObj}).route.query,
+        // );
+        // const { search } = window.location;
+        // const query = ConversionType(parse(search.slice(1)));
 
-        if (JSON.stringify(queryObj) !== JSON.stringify(query)) {
+        const originQuery = router.resolve({query: findObj}).href;
+        const { location } = window;
+        const newQuery = location.pathname + location.search; 
+
+        // if (JSON.stringify(queryObj) !== JSON.stringify(query)) {
+        if (originQuery === newQuery) {
             router.replace({query: findObj});
         }
 
