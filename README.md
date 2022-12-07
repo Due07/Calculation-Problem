@@ -139,4 +139,13 @@
    </ImageComponent>
 
 ```
+## VuePublic（压缩public文件夹中js文件）
+```
+   业务需求
+   需要把一些页面单独放到public文件夹中
+   对public文件夹中js文件进行压缩，解决生产环境中代码的暴露
+   tips: 打包过程中如果提示download webpack-cli
+         可以使用node_modules/ 下的webpack 执行代码块 / 也可下载 npm i webpack-cli@4 -D
+```
+
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Due07&count_private=true&theme=github_dark&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)

@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "builds": "vue-cli-service build && webpack",
+        "buildTest": "vue-cli-service build && ./node_modules/webpack/bin/webpack.js"
+    }
+}
