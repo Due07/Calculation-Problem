@@ -356,16 +356,16 @@ const deepCopy = (target: Ttarget) => {
      */
 
     const handlValueArr = (num: number) => {
-    const arr = Array(num).fill(Array(num));
+        const arr = Array(num).fill(Array(num));
 
-    const valueArr = arr.map((item, index) => {
+        const valueArr = arr.map((item, index) => {
 
-        const returnArr = Array(num).fill(index + 1)
-            .map((ite, iteIndex) => {
-                const superpositionNum = (index === 0 ? 0 : (item.length - 1) * index);
-                return (
-                    ite + superpositionNum
-                ) + (index % 2 ? (item.length - iteIndex - 1) : iteIndex);
+            const returnArr = Array(num).fill(index + 1)
+                .map((ite, iteIndex) => {
+                    const superpositionNum = (index === 0 ? 0 : (item.length - 1) * index);
+                    return (
+                        ite + superpositionNum
+                    ) + (index % 2 ? (item.length - iteIndex - 1) : iteIndex);
             });
 
             return returnArr;
