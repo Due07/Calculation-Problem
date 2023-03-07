@@ -282,4 +282,97 @@ const conversionArr = (arr: Array<Record<string, any> | string []>, handleVal: s
 }
 ```
 
+### 12. 树形结构查找路径
+```typescript
+// 如同 面包屑一样~
+const sourceArr = [{
+    name: "前项渠道",
+    id: 47,
+    child: [{
+        id: 3700,
+        name: "增长测算",
+      },
+      {
+        id: 3701,
+        name: "用户运营(公短邮)",
+      },
+    ],
+  },
+  {
+    name: "前项位置",
+    id: 48,
+    child: [{
+        id: 3710,
+        name: "测算",
+        child: [
+          {
+            id: 3711,
+            name: "结果页顶部",
+          },
+          {
+            id: 3712,
+            name: "结果页五行",
+          },
+          {
+            id: 3713,
+            name: "结果页其它资源位",
+          },
+        ],
+      },
+      {
+        id: 3717,
+        name: "机器人",
+        child: [
+          {
+            id: 3718,
+            name: "小灵",
+          },
+          {
+            id: 3719,
+            name: "查单",
+          },
+        ],
+      },
+      {
+        id: 3721,
+        name: "新媒体",
+        child: [
+          {
+            id: 3728,
+            name: "一对一咨询",
+          },
+          {
+            id: 3729,
+            name: "电商下单触发导粉",
+          },
+        ],
+      },
+      {
+        id: 3731,
+        name: "电商用户电话导粉",
+      },
+      {
+        id: 3736,
+        name: "社群导粉",
+      },
+    ],
+  },
+];
 
+const handleFun = (originArr: Obj[], map: Map<number, string[]>, stringArr: string[] = []) => {
+    // return 一个map函数查询即可
+    originArr.forEach(item => {
+        const arr: string[] = [...stringArr, item.name];
+
+        if (Reflect.has(item, 'child') && item.child?.length) {
+            handleFun(item.child, map, arr);
+        } else {
+            map.set(item.id, arr); 
+        }
+    });
+    return map;
+};
+
+console.log(handleFun(sourceArr, new Map()).get(3736));  // ['前项位置', '社群导粉']
+
+```
