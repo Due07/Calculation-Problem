@@ -259,7 +259,7 @@ function flatArr(arr, handleVal, idArr) {
 ```
 
 ### 11. 扁平数组转化树结构
-
+<!-- 有问题 -->
 ```typescript
 // 转化成cascader想要的数据
 /**
@@ -282,7 +282,100 @@ const conversionArr = (arr: Array<Record<string, any> | string []>, handleVal: s
 }
 ```
 
-### 12. 树形结构查找路径
+### 12. 深拷贝函数
+
+```typescript
+/*
+ * 1. JSON.parse(JSON.stringify(obj)) 常用的深拷贝 方法
+ *		缺陷： - obj 只能 string / number / boolean / Array / Object , 传递 undefined / null / symbol 报错
+ *					- obj 下属性值 不能为 undefined / function / symbol , 被序列化后的属性 (key) 则被默认删除
+ *					- obj 下属性值 Regxp / Error / new Date ，被序列化后值为空对象 {}
+ *					- obj 下属性值 NaN / Infinity / -Infinity ，被序列化后值为null
+ * 需求： 创建一个函数方法，使其满足JSON.parse(JSON.stringify(obj)) 的所有缺陷。
+ */
+
+type Ttarget = any[] | string | number | boolean | Object | undefined | null | symbol | Date | RegExp; 
+
+const deepCopy = (target: Ttarget) => {
+    const test = /^\[object +(\S*)\]$/;
+    const regVal = Reflect.toString.call(target).replace(test, '$1');
+
+    if (regVal === 'Object' || regVal === 'Array') {
+        let result: Record<string, any> | any[] = regVal === 'Object'
+            ? new Object
+            : new Array;
+        for (const key in (target as Object | any[])) {
+            if (Reflect.has(target as Object | any[], key)) {
+                result[key] = deepCopy((target as Record<string, any>)[key]);
+            }
+        }
+        return result;
+    }
+
+    if (regVal === 'Date') return new Date(target as Date);
+
+    if (regVal === 'RegExp') return new RegExp(target as RegExp);
+
+    // string / boolean / number / undefined / null / symbol / NaN / Infinity / -Infinity
+    return target;
+
+};
+```
+
+### 13. 函数题
+
+```typescript
+    /**
+     * 第一题 1. 输入num = 3 页面展示如下表格
+     * 1 1 1 
+     * 2 2 2
+     * 3 3 3
+     */
+
+    const handlValue = (num: number) => {
+    let arr = new Array(num).fill(0);
+    arr = new Array(num).fill(arr);
+
+    // const valueArr = arr.map((item, index) => (Math.ceil((index + 0.1) / 3)))
+    const valueArr = arr.map((item, index) => {
+            return new Array(item.length).fill(index + 1);
+        })
+        console.log(valueArr);
+    }
+
+    /**
+     * 第二题 2. 输入num = 3 展示如下表格
+     * 1 2 3
+     * 6 5 4
+     * 7 8 9
+     * 输入 num = 4
+     * 1 2 3 4
+     * 8 7 6 5
+     * 9 10 11 12
+     * 16 15 14 13
+     */
+
+    const handlValueArr = (num: number) => {
+        const arr = Array(num).fill(Array(num));
+
+        const valueArr = arr.map((item, index) => {
+
+            const returnArr = Array(num).fill(index + 1)
+                .map((ite, iteIndex) => {
+                    const superpositionNum = (index === 0 ? 0 : (item.length - 1) * index);
+                    return (
+                        ite + superpositionNum
+                    ) + (index % 2 ? (item.length - iteIndex - 1) : iteIndex);
+            });
+
+            return returnArr;
+        });
+
+        console.log(valueArr);
+    }
+```
+
+### 14. 树形结构查找路径
 ```typescript
 // 如同 面包屑一样~
 const sourceArr = [{
@@ -374,5 +467,3 @@ const handleFun = (originArr: Obj[], map: Map<number, string[]>, stringArr: stri
 };
 
 console.log(handleFun(sourceArr, new Map()).get(3736));  // ['前项位置', '社群导粉']
-
-```

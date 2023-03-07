@@ -45,6 +45,12 @@ import FileUpload from '@/scripts/widget/FileUpload';
 import 'cropperjs/dist/cropper.min.css';
 import HttpServices from './HttpServices';
 
+// 动态更改字体大小
+const size = ['10px', 'small', false, 'large', 'huge', '24px', '26px', '32px', '48px'];
+const quillSize = VueQuillEditor.Quill.import('formats/size');
+quillSize.whitelist = size;
+console.log(quillSize);
+
 export default {
     name: 'quill-editor-wrapper',
     props: {
@@ -76,7 +82,10 @@ export default {
                             [{ indent: '-1'}, { indent: '+1' }], // 缩进
                             [{ direction: 'rtl' }], // 文本方向
 
-                            [{ size: ['small', false, 'large', 'huge'] }], // 字体大小
+                            // [{ size: ['small', false, 'large', 'huge'] }], // 字体大小
+                            [{
+                                size,
+                            }],
                             [{ header: [1, 2, 3, 4, 5, 6, false] }], // 几级标题
 
                             [{ color: [] }, { background: [] }], // 字体颜色，字体背景颜色

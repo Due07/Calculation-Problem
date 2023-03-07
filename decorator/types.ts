@@ -7,3 +7,9 @@ export type TMethod = (
     key: string,
     descriptor: PropertyDescriptor,
 ) => void;
+
+export type TMethodCallBack = <T>(...args: any[T]) => (
+    target: Vue,
+    key: string,
+    descriptor: PropertyDescriptor,
+) => void;

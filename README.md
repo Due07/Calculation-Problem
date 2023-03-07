@@ -1,18 +1,50 @@
+
+
 # Calculation-Problem
+
 常见的工作计算函数 / 面试函数
 
 ## Decorator
 ```
-   Decorator            装饰器    属性 -> 访问 -> 参数 -> 方法
+   Decorator                             装饰器    属性 -> 访问 -> 参数 -> 方法
    |
-   ├── class            类装饰器
-   |   └── drag          └── 拖拽装饰器
+   ├── class                             类装饰器
+   |   └── drag                           └── 拖拽装饰器
    |
-   ├── method           方法装饰器
-   |   └── public        └── 公共装饰器
+   ├── method                            方法装饰器
+   │   │                                  │
+   │   ├── ParameterRoute                 ├── 参数化路由
+   │   │                                  │
+   │   └── public                         └── 公共装饰器
    │
    └── types.ts         定义类型
 ```
+<img src="https://raw.githubusercontent.com/Due07/Calculation-Problem/master/image/image-20221103180504481.png" alt="image-20221103180504481" />
+
+```typescript
+   import { InitializationAddress, addRouteAddress } from '../Decorator/method/ParameterRoute';
+   // 参数化路由
+   export default class UserList extends Vue {
+      form = {
+         size: 10,
+         page: 1,
+      };
+
+      @InitializationAddress('form')
+      mounted() {
+         // ....发送请求方法
+         this.fetch(this.form);
+      }
+
+      @addRouteAddress('type')
+      fetch(data: any) {
+         // 发送请求
+         // this.http(data)....
+      }
+   }
+
+```
+
 
 ## QuillEditor
 ```
@@ -26,6 +58,7 @@
 
    更新问题点：
       1. 修复富文本黏贴图片时base64的问题
+      2. 修改默认的字体大小 / 配置动态化字体大小
 
 ```
 
@@ -33,7 +66,6 @@
 ```typescript
    封装axios
       功能点: 节流(拦截重复请求)、配合多语言化请求返回信息、统一管理response、error信息提醒
-   ----- 暂无 ~
 ```
 
 ## TemplateRender (模拟模版渲染)
@@ -88,11 +120,13 @@
    // IntersectionObserver 兼容性: https://caniuse.com/?search=IntersectionObserver
    // IntersectionObserver (https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver/IntersectionObserver)
 
-   // 功能点(主): 懒加载 / 失败占位 / 未加载占位 / 预览(未上~)
+   // 功能点(主): 懒加载(IntersectionObserver) / 失败占位 / 未加载占位 / 预览
+   // 兼容性懒加载(低版本) ————> 未
    // 例：
    <ImageComponent
       lazy
       :src=""
+      :previewSrcList=""
       :alt=""
       fit="fill"
       :referrerPolicy
@@ -106,3 +140,13 @@
    </ImageComponent>
 
 ```
+## VuePublic（压缩public文件夹中js文件）
+```
+   业务需求
+   需要把一些页面单独放到public文件夹中
+   对public文件夹中js文件进行压缩，解决生产环境中代码的暴露
+   tips: 打包过程中如果提示download webpack-cli
+         可以使用node_modules/ 下的webpack 执行代码块 / 也可下载 npm i webpack-cli@4 -D
+```
+
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Due07&count_private=true&theme=github_dark&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)

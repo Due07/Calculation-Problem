@@ -15,18 +15,20 @@
             </template>
         </div>
 
-        <template v-if="!lazy ? src !== null : lazySrc !== null">
+        <transition name="image-fade" appear>
             <img
-                class="image-view opacity-none"
-                :class="fit ? fit : ''"
+                v-if="!lazy ? src !== null : lazySrc !== null"
+                class="image-view"
+                :class="{[fit]: fit, 'cursor': previewSrcList.length}"
                 draggable="false"
                 :alt="alt"
                 :src="!lazy ? src : lazySrc"
                 :referrerPolicy="referrerPolicy"
-                @error="onError"
                 @load="onLoad"
+                @error="onError"
+                @click="onClick"
             />
-        </template>
+        </transition>
 
         <template v-if="error">
             <template v-if="$slots.error">
@@ -42,8 +44,13 @@
 import {
     Component, Vue, Prop, Ref,
 } from 'vue-property-decorator';
+import ImagePreviewComponent from './ImagePreview.vue';
 
-@Component
+@Component({
+    components: {
+        ImagePreviewComponent,
+    },
+})
 export default class ImageComponent extends Vue {
     @Ref() private readonly imgDom!: Vue & HTMLElement;
 
@@ -63,6 +70,9 @@ export default class ImageComponent extends Vue {
     // 是否懒加载
     @Prop({default: false, type: Boolean}) lazy!: boolean;
 
+    // 图片预览 Array
+    @Prop({default: () => [], type: Array}) previewSrcList!: string[];
+
     private lazySrc: string | null = null;
 
     private error = false;
@@ -73,6 +83,22 @@ export default class ImageComponent extends Vue {
         if (this.src !== null && this.lazy) {
             this.addObserver();
         }
+        // this.appendBody();
+    }
+
+    appendBody() {
+        const bodyChildren = [...document.body.children];
+        // 已有实例 return
+        if (bodyChildren.some(item => item.className.includes('image-preview'))) return;
+
+        // 手动挂载完后 的组件实例
+        const child = new ImagePreviewComponent({
+            propsData: {
+                list: this.previewSrcList,
+            },
+        }).$mount();
+        // console.log(child);
+        document.body.appendChild(child.$el);
     }
 
     addObserver() {
@@ -98,10 +124,14 @@ export default class ImageComponent extends Vue {
         this.$once('hook:beforeDestroy', () => observer.unobserve(this.imgDom));
     }
 
+    onClick() {
+        if (this.previewSrcList.length) {
+            this.appendBody();
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
     onLoad(e: Event) {
-        this.$nextTick(() => {
-            (e.target as HTMLElement).classList.remove('opacity-none');
-        });
         this.load = true;
         this.$emit('load', e);
     }
@@ -120,8 +150,11 @@ export default class ImageComponent extends Vue {
         position: absolute;
     }
     .image-view {
-        transition: opacity 1s 0.1s;
+        opacity: 1;
 
+        &.cursor {
+            cursor: pointer;
+        }
         &.fill {
             object-fit: fill;
         }
@@ -136,9 +169,6 @@ export default class ImageComponent extends Vue {
         }
         &.scale-down {
             object-fit: scale-down;
-        }
-        &.opacity-none {
-            opacity: 0;
         }
     }
     // loading显示
@@ -161,6 +191,15 @@ export default class ImageComponent extends Vue {
         0% {
             width: 0;
         }
+    }
+
+    .image-fade-enter,
+    .image-fade-leave-active {
+        opacity: 0;
+    }
+    .image-fade-enter-active,
+    .image-fade-leave-active {
+        transition: opacity 1.2s;
     }
 }
 </style>
