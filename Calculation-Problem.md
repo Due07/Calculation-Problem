@@ -3,6 +3,7 @@
 ```javascript
 //单组数组去重  var a=[1,1,2,3,4,5,5,5,6];
 //1. 利用对象属性的唯一性 进行去重，然后用对象的方法获取里面的keys（属性）--->默认返回的是一个数组 
+// 缺点： key中 1 或者 '1' 最后转化会变成 '1'
 var ar={}; 
 a.forEach((ele,index)=>{ ar[ele]=index});
 var arr=Object.keys(ar);   
@@ -11,6 +12,11 @@ var arr=Object.keys(ar);
 var arr=new Set(a);
 arr=Array.from(arr);
 
+//3. 使用reduce方法
+const a = [1, '1',2,'2','asd', '123', 5, 73578, 73, 8, 5, 2, 5, 76, 6, 'asd'];
+a.reduce((pre, cur) => {
+    return pre.includes(cur) ? pre : [...pre, cur];
+}, []);
 //上面两个方法对于多数组去重也是比较效率的,就不用双重for去循环对比了
 //多重组数 也可以用冒泡 如果是考验你用冒泡是否熟悉的话
 ```
