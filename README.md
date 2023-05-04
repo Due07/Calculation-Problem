@@ -149,4 +149,10 @@
          可以使用node_modules/ 下的webpack 执行代码块 / 也可下载 npm i webpack-cli@4 -D
 ```
 
+## 九宫格抽奖盒子动画
+```
+   业务需求：
+      支持 原生dom 或者 vue 中for渲染出来盒子 抽奖动画
+```
+
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Due07&count_private=true&theme=github_dark&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
