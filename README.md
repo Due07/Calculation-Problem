@@ -149,10 +149,17 @@
          可以使用node_modules/ 下的webpack 执行代码块 / 也可下载 npm i webpack-cli@4 -D
 ```
 
-## 九宫格抽奖盒子动画
+## Raffle 九宫格抽奖盒子动画
 ```
    业务需求：
       支持 原生dom 或者 vue 中for渲染出来盒子 抽奖动画
 ```
+
+## WindowDrag 模拟window文件拖拽
+```
+   业务需求：
+      实现自定义显示表头
+```
+<img src="https://raw.githubusercontent.com/Due07/Calculation-Problem/master/image/window-drag.gif" alt="image-20220923115231264" style="zoom: 50%; display: inline-block" />
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Due07&count_private=true&theme=github_dark&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
