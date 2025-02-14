@@ -16,6 +16,7 @@
           'box inline-block',
           selectKeys.includes(item.value) ? 'active' : '',
           item.class ?? '',
+          isDraw ? 'pointer-events-none' : ''
         ]"
         :ref="(el) => el && boxMap.set(el as HTMLElement, item)"
         :draggable="selectKeys.includes(item.value)"
@@ -50,7 +51,7 @@ const emits = defineEmits<{
 const contentRef = shallowRef<HTMLElement>();
 const canvasRef = shallowRef<HTMLCanvasElement>();
 
-const {onMouseDown, onMouseMove, onMouseUp} = useDrawCanvas(canvasRef, contentRef);
+const {isDraw, onMouseDown, onMouseMove, onMouseUp} = useDrawCanvas(canvasRef, contentRef);
 const boxMap = new Map<HTMLElement, TBox>();
 /** 选择的目标 */
 const selectTarget = shallowReactive<TBox[]>([]);
@@ -123,6 +124,7 @@ defineExpose({
   padding: 20px;
 
   .box {
+    position: relative;
     border: 1px solid rgba($color: #565656, $alpha: .4);
     border-radius: 4px;
     user-select: none;

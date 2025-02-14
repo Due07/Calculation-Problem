@@ -51,6 +51,7 @@ export const useDrawCanvas = (
   contentRef: Ref<HTMLElement | undefined>,
 ) => {
   const canvasMap = new WeakMap();
+  const isDraw = shallowRef(false);
   let canvas = canvasRef.value;
   let canvasCtx: CanvasRenderingContext2D | null;
 
@@ -70,6 +71,7 @@ export const useDrawCanvas = (
 
     // const resultEv = Object.assign(ev, {layerY: ev.layerY + scrollDiff});
     canvasMap.set(canvas, {ev, scrollDiff});
+    isDraw.value = true;
   };
 
   /** 鼠标移动 */
@@ -88,7 +90,7 @@ export const useDrawCanvas = (
   const onMouseUp = () => {
     if (!canvas) return;
     canvasMap.delete(canvas);
-
+    isDraw.value = false;
     canvasCtx?.clearRect(0, 0, canvas.width, canvas.height);
   };
 
@@ -97,6 +99,7 @@ export const useDrawCanvas = (
   });
 
   return {
+    isDraw,
     onMouseDown,
     onMouseMove,
     createCanvasCtx,

@@ -43,9 +43,9 @@
 </template>
 
 <script lang="ts" setup>
-import WindowCanvas from './WindowCanvas/index.vue';
+import WindowCanvas from './DragCanvas/index.vue';
 import { Setting } from '@element-plus/icons-vue';
-import type { TBox } from './WindowCanvas/config';
+import type { TBox } from './DragCanvas/config';
 import { ClearReactive } from '@/common/base/utils';
 import QuickSelect from './QuickSelect.vue';
 
@@ -57,13 +57,9 @@ type TPopoverContent = {
   target: TBox[],
 };
 
-const incrementList = Array(179).fill(0).reduce((pre, cur, index) => {
-  return [...pre, {id: index+2, label: index+2, value: index+2}];
-}, []);
-
 const props = withDefaults(
-  defineProps<{visible: boolean, originList?: TBox[]}>(),
-  { originList: () => incrementList },
+  defineProps<{visible: boolean, originList?: TBox[], selectList?: TBox[]}>(),
+  { originList: () => [], selectList: () => [] },
 );
 const emits = defineEmits<{
   (e: 'update:visible', value: boolean): void,
@@ -76,7 +72,7 @@ const getVisible = computed({
 
 const allList: TBox[] = shallowReactive(props.originList);
 const allSelect: TBox[] = shallowReactive([]);
-const chosenList: TBox[] = shallowReactive([]);
+const chosenList: TBox[] = shallowReactive(props.selectList);
 const chosenSelect: TBox[] = shallowReactive([]);
 
 const canvasRef = shallowReactive({} as Record<'all' | 'chosen', InstanceType<typeof WindowCanvas> | null>);
