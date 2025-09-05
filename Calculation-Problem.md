@@ -249,12 +249,12 @@ function flatArr(arr, handleVal, idArr) {
 ### 10. 树形数据拍平
 
 ```typescript
-// 拍平数据
+
+/** 方案一：reduce + 递归 */
 /**
  *
  * @param arr 数据
  * @param handleVal 选择的处理的属性
- * reduce + 递归
  */
   flatArr(arr: Array<Record<string, any> | string[]>, handleVal: string) {
       return arr.reduce((pre: any, cur: any) => {
@@ -262,10 +262,33 @@ function flatArr(arr, handleVal, idArr) {
           return !pre ? [cur, ...curArr] : [...pre, cur, ...curArr];
       }, []);
   }
+
+/** 方案二：单链表遍历（while） --- 推：栈空间最少 */
+/** (单链列表遍历树) - 深度优先遍历 (DFS) */
+const singularChainTree = <T extends object>(arr: T[], handleKeys: string[]) => {
+  console.time('singularChain');
+  const stack: T[] = [...arr];
+
+  const resultArr: unknown[] = [];
+
+  while (stack.length) {
+    const target = stack.pop()!;
+    const cloneTarget = target;
+
+    handleKeys.forEach(item => {
+      if (Reflect.has(target, item) && target[item]) stack.push(...target[item])
+    })
+    resultArr.push(cloneTarget);
+  }
+
+  console.timeEnd('singularChain');
+  return resultArr;
+};
 ```
 
 ### 11. 扁平数组转化树结构
 <!-- 有问题 -->
+
 ```typescript
 // 转化成cascader想要的数据
 /**
@@ -473,3 +496,4 @@ const handleFun = (originArr: Obj[], map: Map<number, string[]>, stringArr: stri
 };
 
 console.log(handleFun(sourceArr, new Map()).get(3736));  // ['前项位置', '社群导粉']
+```
